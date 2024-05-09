@@ -1,8 +1,5 @@
 import pandas as pd
 import numpy as np
-from sklearn import datasets
-
-
 
 def clean_tabular_data(data):
     def remove_rows_with_missing_ratings(df):
@@ -42,6 +39,7 @@ if __name__ == "__main__":
 
 
 def load_airbnb(label):
+    data = data.drop(columns=['ID', 'Category', 'Title', 'Description', 'Amenities', 'Location', 'url'])
     features = data.drop(columns=[label])
     labels = data[label]
     
