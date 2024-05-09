@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+from sklearn import datasets
+
 
 
 def clean_tabular_data(data):
@@ -38,3 +40,9 @@ if __name__ == "__main__":
     
     data.to_csv(r"C:\Users\harde\Documents\AiCore\Airbnb/tabular_data/clean_tabular_data.csv", index=False)
 
+
+def load_airbnb(label):
+    features = data.drop(columns=[label])
+    labels = data[label]
+    
+    return features, labels
