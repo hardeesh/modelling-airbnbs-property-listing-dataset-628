@@ -1,0 +1,4 @@
+optimiser: Adagrad
+learning_rate: 0.004
+hidden_layer_width: 16
+depth: 2
