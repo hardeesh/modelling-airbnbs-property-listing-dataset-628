@@ -4,6 +4,7 @@ import torch
 from sklearn.model_selection import train_test_split
 import torch.nn.functional as F
 import numpy as np
+import yaml
 from torch.utils.tensorboard import SummaryWriter
 
 
@@ -25,7 +26,6 @@ class AirbnbNightlyPriceRegressionDataset(Dataset):
     def __len__(self):
         return len(self.data)
     
-
 dataset = AirbnbNightlyPriceRegressionDataset()
 
 train_data, test_data = train_test_split(dataset, test_size=0.2, random_state=42)
@@ -47,9 +47,14 @@ class LinearRegression(torch.nn.Module):
 input_size = len(data.columns) - 1 
 model = LinearRegression(input_size)
 
+def get_nn_config(config_file):
+    with open(config_file, 'r') as f:
+        config = yaml.safe_load(f)
+    return config
+
 def train(model, train_loader, val_loader, epochs=10):
 
-    optimiser = torch.optim.SGD(model.parameters(), lr=0.2)
+    optimiser = torch.optim.Adagrad(model.parameters(), lr=0.004)
 
     writer = SummaryWriter()
 
@@ -95,3 +100,4 @@ class NN(torch.nn.Module):
 model = NN()
 
 train(model, train_loader, val_loader)
+
