@@ -38,8 +38,22 @@ if __name__ == "__main__":
     data.to_csv(r"C:\Users\harde\Documents\AiCore\Airbnb/tabular_data/clean_tabular_data.csv", index=False)
 
 
-def load_airbnb(label):
+def load_airbnb_numeric(label):
+    data = pd.read_csv('tabular_data/clean_tabular_data.csv')
+    data = pd.DataFrame(data)
+
     data = data.drop(columns=['ID', 'Category', 'Title', 'Description', 'Amenities', 'Location', 'url'])
+    features = data.drop(columns=[label])
+    labels = data[label]
+    
+    return features, labels
+
+def load_airbnb_category(label):
+    data = pd.read_csv('tabular_data/clean_tabular_data.csv')
+    data = pd.DataFrame(data)
+
+    data = data.drop(columns=['ID', 'Title', 'Description', 'Amenities', 'Location', 'url'])
+
     features = data.drop(columns=[label])
     labels = data[label]
     
