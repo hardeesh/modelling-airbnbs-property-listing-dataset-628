@@ -1,4 +1,4 @@
-from tabular_data import load_airbnb
+from tabular_data import load_airbnb_numeric
 from sklearn.linear_model import SGDRegressor
 from sklearn.ensemble import RandomForestRegressor,GradientBoostingRegressor
 from sklearn.tree import DecisionTreeRegressor
@@ -11,12 +11,11 @@ import json
 from joblib import dump
 
 
-features, labels = load_airbnb('Price_Night')
+features, labels = load_airbnb_numeric('Price_Night')
 
 X_train, X_temp, y_train, y_temp = train_test_split(features, labels, test_size=0.2, random_state=42)
 
 X_validation, X_test, y_validation, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42)
-
 
 
 def baseline_regression_model (model_class, X_test, y_test, X_train, y_train):
